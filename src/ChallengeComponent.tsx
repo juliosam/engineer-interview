@@ -3,13 +3,16 @@ import React, { useState } from 'react'
 export function ChallengeComponent() {
 
   const [task,setTask] = useState("")
+  const [todoList, setTodoList]= useState<string[]>([])
+  const [inProgressList, setInProgressList]= useState<string[]>([])
+  const [doneList, setDoneList]= useState<string[]>([])
 
   const createTask = (e:any)=>{
    e.preventDefault()
    console.log(task)
    setTodoList([...todoList, task])
+   setTask("")
   }
-
   const goBack = (e:any)=>{
     console.log("go back")
     const currentTask = e.target.nextElementSibling.innerHTML;
@@ -23,11 +26,13 @@ export function ChallengeComponent() {
     if (currentUL["id"] ==="inProgress"){
       setTodoList([...todoList, currentTask]);
       const newList = inProgressList.filter(item => item !== currentTask)
-      setInProgressList(newList)
+      setInProgressList(newList);
+    } 
+    if (currentUL["id"] ==="todo"){
+       console.log(e.target)
+      e.target.style.backgroundColor="rgb(177, 91, 91)";
     }
-    
   }
-
   const goFoward = (e:any)=>{
     console.log("go foward")
     const currentTask = e.target.previousElementSibling.innerHTML;
@@ -39,17 +44,14 @@ export function ChallengeComponent() {
     }
     if (currentUL["id"] ==="inProgress"){
       setDoneList([...doneList, currentTask]);
-      const newList = inProgressList.filter(item => item !== currentTask)
-      setInProgressList(newList)
+      const newList = inProgressList.filter(item => item !== currentTask);
+      setInProgressList(newList);
     }
+    if (currentUL["id"] ==="done"){
+      console.log(e.target)
+     e.target.style.backgroundColor="rgb(114, 204, 102)";
+   }
   }
-
-  const [todoList, setTodoList]= useState<string[]>([])
-
-  const [inProgressList, setInProgressList]= useState<string[]>([])
-
-  const [doneList, setDoneList]= useState<string[]>([])
-
 
   const listItem = todoList.map(task=>{
     return (
@@ -111,7 +113,7 @@ export function ChallengeComponent() {
         </div>
       </div>
       <form className='task-creator' onSubmit={createTask}>
-        <input type='text' value={task} onChange={(e)=>setTask(e.target.value)}/>
+        <input type='text' required value={task} onChange={(e)=>setTask(e.target.value)}/>
         <button>+</button>
       </form>
     </>

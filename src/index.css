@@ -12,15 +12,23 @@ body {
 
 .column{
   width: 28%;
-  border: 1px solid gray;
-  height: 80vh;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  min-height: 80vh;
   border-radius: 15px;
+  text-align: center;
+  padding-bottom: 20px;
 }
 
 .card{
   display: flex;
   width: 90%;
   justify-content: space-between;
+  margin: 10px 4%;
+  padding: 10px;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 10px;
 }
 
 ul {
@@ -38,8 +46,39 @@ li{
 }
 
 .task-creator{
-  width: 300px;
+  width: 400px;
   margin: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.task-creator input{
+  width: 300px;
+  height: 50px;
+  font-size: 20px;
+  margin-right: 10px;
+  border-radius: 10px;
+  border: 1px solid gray;
+  outline: none;
+}
+
+.task-creator button{
+  width: 55px;
+  height: 55px;
+  font-size: 28px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  background-color: blue;
+}
+
+.task-creator button:hover{
+  cursor: pointer;
+  background-color: rgb(79, 79, 219);
+}
+
+.task-creator button:active{
+  background-color: rgb(125, 125, 197);
 }
 
 .go-back{
@@ -50,14 +89,32 @@ li{
   border: none;
   border-radius: 8px;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  cursor: pointer;
+}
+
+.go-back:hover{
+  background-color: rgb(219, 21, 21);
+}
+
+.go-back:active{
+  background-color: rgb(177, 91, 91);
 }
 
 .go-foward{
   color: white;
   font-size: 35px;
   font-weight: 700;
-  background-color: rgb(23, 177, 3);
+  background-color: rgb(24, 145, 8);
   border: none;
   border-radius: 8px;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  cursor: pointer;
+}
+
+.go-foward:hover{
+  background-color: rgb(57, 202, 38);
+}
+
+.go-foward:active{
+  background-color: rgb(114, 204, 102);
 }
