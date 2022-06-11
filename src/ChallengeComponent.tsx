@@ -7,49 +7,49 @@ export function ChallengeComponent() {
   const [inProgressList, setInProgressList]= useState<string[]>([])
   const [doneList, setDoneList]= useState<string[]>([])
 
-  const createTask = (e:any)=>{
+  const createTask = (e:React.FormEvent<HTMLFormElement>)=>{
    e.preventDefault()
    console.log(task)
    setTodoList([...todoList, task])
    setTask("")
   }
-  const goBack = (e:any)=>{
+  const goBack = (e:React.MouseEvent<HTMLButtonElement>)=>{
     console.log("go back")
-    const currentTask = e.target.nextElementSibling.innerHTML;
-    const currentUL = e.target.parentElement.parentElement.parentElement;
+    const currentTask = e.currentTarget.value;
 
-    if (currentUL["id"] ==="done"){
+    if (e.currentTarget.classList.contains("gb-dc")){
       setInProgressList([...inProgressList, currentTask]);
       const newList = doneList.filter(item => item !== currentTask)
       setDoneList(newList)
     }
-    if (currentUL["id"] ==="inProgress"){
+    if (e.currentTarget.classList.contains("gb-ip")){
       setTodoList([...todoList, currentTask]);
       const newList = inProgressList.filter(item => item !== currentTask)
       setInProgressList(newList);
     } 
-    if (currentUL["id"] ==="todo"){
+    if (e.currentTarget.classList.contains("gb-td")){
        console.log(e.target)
-      e.target.style.backgroundColor="rgb(177, 91, 91)";
+      e.currentTarget.style.backgroundColor="rgb(177, 91, 91)";
     }
   }
-  const goFoward = (e:any)=>{
+  //
+  const goFoward = (e:React.MouseEvent<HTMLButtonElement>)=>{
     console.log("go foward")
-    const currentTask = e.target.previousElementSibling.innerHTML;
-    const currentUL = e.target.parentElement.parentElement.parentElement;
-    if (currentUL["id"] ==="todo"){
+    const currentTask = e.currentTarget.value;
+
+    if (e.currentTarget.classList.contains("gf-td")){
       setInProgressList([...inProgressList, currentTask]);
       const newList = todoList.filter(item => item !== currentTask)
       setTodoList(newList)
     }
-    if (currentUL["id"] ==="inProgress"){
+    if (e.currentTarget.classList.contains("gf-ip")){
       setDoneList([...doneList, currentTask]);
       const newList = inProgressList.filter(item => item !== currentTask);
       setInProgressList(newList);
     }
-    if (currentUL["id"] ==="done"){
+    if (e.currentTarget.classList.contains("gf-dc")){
       console.log(e.target)
-     e.target.style.backgroundColor="rgb(114, 204, 102)";
+     e.currentTarget.style.backgroundColor="rgb(114, 204, 102)";
    }
   }
 
@@ -57,9 +57,9 @@ export function ChallengeComponent() {
     return (
   <li>
     <div className='card'>
-      <button className='go-back' onClick={goBack}>←</button>
+      <button className='go-back gb-td' value={task} onClick={goBack}>←</button>
       <h3 className='card-title'>{task}</h3>
-      <button className='go-foward' onClick={goFoward}>→</button>
+      <button className='go-foward gf-td' value={task} onClick={goFoward}>→</button>
     </div>
   </li>
     )
@@ -69,9 +69,9 @@ export function ChallengeComponent() {
     return (
   <li>
     <div className='card'>
-      <button className='go-back' onClick={goBack}>←</button>
+      <button className='go-back gb-ip' value={task} onClick={goBack}>←</button>
       <h3 className='card-title'>{task}</h3>
-      <button className='go-foward' onClick={goFoward}>→</button>
+      <button className='go-foward gf-ip' value={task} onClick={goFoward}>→</button>
     </div>
   </li>
     )
@@ -81,9 +81,9 @@ export function ChallengeComponent() {
     return (
   <li>
     <div className='card'>
-      <button className='go-back' onClick={goBack}>←</button>
+      <button className='go-back gb-dc' value={task} onClick={goBack}>←</button>
       <h3 className='card-title'>{task}</h3>
-      <button className='go-foward' onClick={goFoward}>→</button>
+      <button className='go-foward gf-dc' value={task} onClick={goFoward}>→</button>
     </div>
   </li>
     )
